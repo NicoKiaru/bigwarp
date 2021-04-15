@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>29.2.1</version>
+		<version>30.0.0</version>
 		<relativePath />
 	</parent>
 
 	<groupId>sc.fiji</groupId>
 	<artifactId>bigwarp_fiji</artifactId>
-	<version>6.0.3-SNAPSHOT</version>
+	<version>7.0.1-SNAPSHOT</version>
 
 	<name>BigWarp plugin for Fiji</name>
 	<description>A tool for manual pointwise deformable registration using bigdataviewer.</description>
@@ -109,10 +109,12 @@
 		<license.copyrightOwners>Howard Hughes Medical Institute.</license.copyrightOwners>
 		<license.projectName>BigWarp plugin for Fiji.</license.projectName>
 
+		<opencsv.version>3.9</opencsv.version>
 		<ejml.version>0.24</ejml.version>
 		<jcommander.version>1.48</jcommander.version>
-		<bigdataviewer-core.version>10.0.0</bigdataviewer-core.version>
-		<bigdataviewer-vistools.version>1.0.0-beta-22</bigdataviewer-vistools.version>
+		<bigdataviewer-core.version>10.2.0</bigdataviewer-core.version>
+		<bigdataviewer-vistools.version>1.0.0-beta-28</bigdataviewer-vistools.version>
+		<opencsv.version>3.9</opencsv.version>
 
 
 		<bigdataviewer-core.version>10.0.0</bigdataviewer-core.version>
@@ -121,6 +123,10 @@
 
 		<!-- NB: Deploy releases to the SciJava Maven repository. -->
 		<releaseProfiles>deploy-to-scijava</releaseProfiles>
+
+		<n5.version>2.5.0</n5.version>
+		<n5-ij.version>2.0.0</n5-ij.version>
+		<n5-imglib2.version>4.0.0</n5-imglib2.version>
 	</properties>
 
 	<repositories>
@@ -151,6 +157,7 @@
 		<dependency>
 			<groupId>com.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
+			<version>${opencsv.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mpicbg</groupId>
@@ -187,7 +194,6 @@
 		<dependency>
 			<groupId>sc.fiji</groupId>
 			<artifactId>bigdataviewer-vistools</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>ome</groupId>
@@ -197,11 +203,34 @@
 					<groupId>ch.systems.cisd</groupId>
 					<artifactId>jhdf5</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-core</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.scijava</groupId>
 			<artifactId>ui-behaviour</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>sc.fiji</groupId>
+			<artifactId>fiji-lib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.janelia.saalfeldlab</groupId>
+			<artifactId>n5-ij</artifactId>
+            <version>${n5-ij.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.janelia.saalfeldlab</groupId>
+			<artifactId>n5</artifactId>
+            <version>${n5.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.janelia.saalfeldlab</groupId>
+			<artifactId>n5-imglib2</artifactId>
+            <version>${n5-imglib2.version}</version>
 		</dependency>
 	</dependencies>
 </project>

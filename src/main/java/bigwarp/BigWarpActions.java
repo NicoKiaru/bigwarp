@@ -52,11 +52,14 @@ public class BigWarpActions
 	public static final String BRIGHTNESS_SETTINGS = "brightness settings";
 	public static final String VISIBILITY_AND_GROUPING = "visibility and grouping %s";
 	public static final String SHOW_HELP = "help";
+	public static final String SHOW_SOURCE_INFO = "show source info";
+
 	public static final String CROP = "crop";
 	public static final String SAVE_SETTINGS = "save settings";
 	public static final String LOAD_SETTINGS = "load settings";
 	public static final String LOAD_LANDMARKS = "load landmarks";
 	public static final String SAVE_LANDMARKS = "save landmarks";
+	public static final String QUICK_SAVE_LANDMARKS = "quick save landmarks";
 
 	public static final String LANDMARK_GRID_DIALOG = "landmark grid dialog";
 
@@ -234,6 +237,7 @@ public class BigWarpActions
 		map.put( REDO, "control shift Z" );
 
 		map.put( SAVE_LANDMARKS, "control S" );
+		map.put( QUICK_SAVE_LANDMARKS, "control Q" );
 		map.put( LOAD_LANDMARKS, "control O" );
 
 		map.put( EXPORT_IP, "control E" );
@@ -281,6 +285,7 @@ public class BigWarpActions
 
 		new ToggleDialogAction( BRIGHTNESS_SETTINGS, bw.brightnessDialog ).put( actionMap );
 		new ToggleDialogAction( SHOW_HELP, bw.helpDialog ).put( actionMap );
+		new ToggleDialogAction( SHOW_SOURCE_INFO, bw.sourceInfoDialog ).put( actionMap );
 
 		new SaveWarpedAction( bw ).put( actionMap );
 		new SaveWarpedXmlAction( bw ).put( actionMap );
@@ -290,6 +295,7 @@ public class BigWarpActions
 
 		new LoadLandmarksAction( bw ).put( actionMap );
 		new SaveLandmarksAction( bw ).put( actionMap );
+		new QuickSaveLandmarksAction( bw ).put( actionMap );
 
 		new LandmarkGridDialogAction( bw ).put( actionMap );
 
@@ -484,7 +490,7 @@ public class BigWarpActions
 		@Override
 		public void actionPerformed( ActionEvent e )
 		{
-			bw.transformToString();
+			bw.getBwTransform().transformToString();
 		}
 	}
 	public static class DebugAction extends AbstractNamedAction
@@ -996,6 +1002,22 @@ public class BigWarpActions
 		}
 	}
 
+	public static class QuickSaveLandmarksAction extends AbstractNamedAction
+	{
+		private static final long serialVersionUID = -4761309639234262643L;
+		BigWarp< ? > bw;
+		public QuickSaveLandmarksAction( final BigWarp< ? > bw )
+		{
+			super( QUICK_SAVE_LANDMARKS );
+			this.bw = bw;
+		}
+		@Override
+		public void actionPerformed( ActionEvent e )
+		{
+			bw.quickSaveLandmarks();
+		}
+	}
+
 	public static class SaveLandmarksAction extends AbstractNamedAction
 	{
 		private static final long serialVersionUID = 7897687176745034315L;
@@ -1056,7 +1078,7 @@ public class BigWarpActions
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			bw.printAffine();
+			bw.getBwTransform().printAffine();
 		}
 	}
 
